@@ -1,7 +1,5 @@
 import inquirer from "inquirer";
 import fs from "fs";
-import {type} from "os";
-// const fs = require("fs")
 
 
 const DBFILE = "db.txt";
