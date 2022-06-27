@@ -4,8 +4,7 @@ const TelegramSender = require("node-telegram-bot-api");
 
 
 const program = new Command();
-const token = "5445242861:AAFvKOv91wQy4U5qhfOuZ8hhGyM8Jlz7df4";
-const bot = new TelegramSender(token, {polling: false});
+const bot = new TelegramSender(process.env["TOKEN"], {polling: false});
 
 
 program
