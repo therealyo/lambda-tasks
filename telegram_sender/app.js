@@ -13,13 +13,6 @@ program
     .description("Simple telegram bot that sends entered messages back to you");
 
 
-program.command("t <string>")
-    .action((str) => {
-        for (let i = 0; i <= 10; i++){
-            bot.sendMessage(process.env["CHAT_ID"], str);
-        }
-    });
-
 
 program.command("m <string>")
     .description("Sending your entered message back to you via bot")
