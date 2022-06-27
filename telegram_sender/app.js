@@ -12,7 +12,6 @@ program
     .description("Simple telegram bot that sends entered messages back to you");
 
 
-
 program.command("m <string>")
     .description("Sending your entered message back to you via bot")
     .action((str) => {
