@@ -45,32 +45,40 @@ bot.on("message", (msg) => {
         case "Прогноз погоды на 3 часа":
             weatherUtils.get3HoursReply()
                 .then((text) => {
-                    bot.sendMessage(id, text);
-                    defaultChoice(id);
+                    bot.sendMessage(id, text)
+                        .then(r => {
+                            defaultChoice(id);
+                        });
                 })
 
             break;
         case "Прогноз погоды на 6 часов":
             weatherUtils.get6HoursReply()
                 .then((text) => {
-                    bot.sendMessage(id, text);
-                    defaultChoice(id);
+                    bot.sendMessage(id, text)
+                        .then(r => {
+                            defaultChoice(id);
+                        });
                 })
 
             break;
         case "Monobank":
             currUtils.getMonoReply()
                 .then((text) => {
-                    bot.sendMessage(id, text);
-                    defaultChoice(id);
+                    bot.sendMessage(id, text)
+                        .then(r => {
+                            defaultChoice(id);
+                        });
+
                 });
 
             break;
         case "ПриватБанк":
             currUtils.getPrivatReply()
                 .then((text) => {
-                    bot.sendMessage(id, text);
-                    defaultChoice(id);
+                    bot.sendMessage(id, text).then(r => {
+                        defaultChoice(id);
+                    });
                 });
 
             break;

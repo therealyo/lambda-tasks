@@ -30,7 +30,11 @@ async function getForecast() {
 
 async function parseDict(dict) {
     let date = new Date(dict["dt_txt"]);
-    let day = date.toLocaleString().split(".").slice(0, 2);
+    let day = date.toLocaleString()
+        .replaceAll("/", ".")
+        .split(".")
+        .reverse()
+        .slice(-2);
 
     return {
         temperature: (dict["main"]["temp"] + kelvinZero).toFixed(2),
@@ -88,6 +92,7 @@ async function createResponseMessage(forecast) {
         for (let el of value) {
             msg += `На ${el.time}:00 температура ${el.temperature}°, ощущается как ${el.feelsLike}°, ${el.weather}\n`;
         }
+        msg += "\n"
     })
     return msg;
 }
