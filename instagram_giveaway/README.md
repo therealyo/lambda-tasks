@@ -1,0 +1,1 @@
+Unique values in data directory: 129240<br />Appeared in 20 files: 441<br />Appeared in 10+ files: 73245<br />Time used: 2.341s

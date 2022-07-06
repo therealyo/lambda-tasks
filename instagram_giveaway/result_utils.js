@@ -3,7 +3,7 @@ const reader = require("./reader_utils");
 const counter = require("./counter_utils");
 
 const writeResults = (results) => {
-    fs.writeFile("results.md", results, "utf8", (err) => {
+    fs.writeFile("README.md", results.replaceAll("\n", "<br />"), "utf8", (err) => {
         if (err) throw err;
         console.log("SavedResults")
     });
