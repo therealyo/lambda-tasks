@@ -37,29 +37,37 @@ const findIsDone = (json) => {
 }
 
 
-const iterateEndpoints = async (endpoints) => {
+const getIsDone = async (endpoint) => {
+    const info = await getInfoFromEndpoint(endpoint);
+    const data = info.data;
+    return findIsDone(data);
+}
+
+
+const iterateEndpoints = (endpoints) => {
     const isDoneCounter = {
         "true": 0,
         "false": 0
     }
     let result = "";
+    let endpointCounter = 0;
 
-
-    for (let endpoint of endpoints) {
-        const info = await getInfoFromEndpoint(endpoint);
-        const data = info.data;
-        const isDone = findIsDone(data);
-        result += `${endpoint}: isDone=${isDone}\n`;
+    endpoints.forEach(async endpoint => {
+        const isDone = await getIsDone(endpoint);
         isDoneCounter[`${isDone}`] += 1;
-    }
+        result += `${endpoint}: isDone=${isDone}\n`;
+        endpointCounter++;
 
-    result += `Значений true: ${isDoneCounter["true"]}\n Значений false: ${isDoneCounter["false"]}`
-    return result;
+        if (endpointCounter === 20) {
+            result += `Значений true: ${isDoneCounter["true"]}\nЗначений false: ${isDoneCounter["false"]}`;
+            writeResults(result);
+        }
+    })
 }
 
 
-const writeResults = (results) => {
-    fs.writeFile("README.md", results.replaceAll("\n", "<br />"), "utf8", (err) => {
+const writeResults = (result) => {
+    fs.writeFile("README.md", result.replaceAll("\n", "<br />"), "utf8", (err) => {
         if (err) throw err;
         console.log("SavedResults")
     });
@@ -68,8 +76,7 @@ const writeResults = (results) => {
 
 const main = async () => {
     const endpoints = await readEndpoints();
-    const result = await iterateEndpoints(endpoints);
-    writeResults(result);
+    iterateEndpoints(endpoints);// writeResults(result);
 }
 
 
