@@ -58,7 +58,7 @@ const iterateEndpoints = (endpoints) => {
         result += `${endpoint}: isDone=${isDone}\n`;
         endpointCounter++;
 
-        if (endpointCounter === 20) {
+        if (endpointCounter === endpoints.length) {
             result += `Значений true: ${isDoneCounter["true"]}\nЗначений false: ${isDoneCounter["false"]}`;
             writeResults(result);
         }
