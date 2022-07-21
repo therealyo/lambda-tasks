@@ -2,8 +2,6 @@ const path = require("path");
 const fs = require("fs");
 
 
-
-
 const readDir = async (dirName) => {
     return await fs.promises.readdir(dirName);
 }
