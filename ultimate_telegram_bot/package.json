@@ -1,0 +1,16 @@
+{
+  "name": "ultimate_telegram_bot",
+  "version": "1.0.0",
+  "description": "telegram bot that can show you weather forecast for 5 days and uah-usd or uah-eur conversion rate ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
+    "node-telegram-bot-api": "^0.58.0"
+  }
+}

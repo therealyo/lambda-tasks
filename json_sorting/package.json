@@ -1,0 +1,14 @@
+{
+  "name": "json_sorting",
+  "version": "1.0.0",
+  "description": "get fulfillment status of a bunch of json objects",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
+}

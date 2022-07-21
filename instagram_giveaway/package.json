@@ -1,0 +1,11 @@
+{
+  "name": "instagram_giveaway",
+  "version": "1.0.0",
+  "description": "simple app to calculate user entries in instagram giveaway",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

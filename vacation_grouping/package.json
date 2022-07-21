@@ -1,0 +1,11 @@
+{
+  "name": "vacation_grouping",
+  "version": "1.0.0",
+  "description": "simple app that groups all user vacation entries into one json",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

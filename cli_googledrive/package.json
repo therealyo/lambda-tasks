@@ -1,0 +1,16 @@
+{
+  "name": "cli_googledrive",
+  "version": "1.0.0",
+  "description": "simple cli googledrive file loader",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "googleapis": "^105.0.0",
+    "inquirer": "^8.2.4",
+    "tinyurl": "^1.1.7"
+  }
+}
