@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 
-const GEOPOSITIONS = "ip_geoposition/IP2LOCATION-LITE-DB1.CSV";
+const GEOPOSITIONS = "IP2LOCATION-LITE-DB1.CSV";
 const IP_CONSTS = [16777216, 65536, 256, 1];
 
 
@@ -79,7 +79,7 @@ const createResponse = async (ip) => {
         "country": geopostion[3].replaceAll("\r", "")
     };
 
-    return JSON.stringify(responseJSON);
+    return JSON.stringify(responseJSON, null, 3);
 }
 
 
