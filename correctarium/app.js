@@ -1,16 +1,11 @@
 const express = require("express");
 const calculations = require("./calculations");
-// const request = require("./request");
 const app = express();
 
 
 app.use(express.json());
 const PORT = 3000;
 
-
-// app.get("/", (req, res) => {
-//     request.makeRequest(request.data);
-// })
 
 app.get("/", (req, res) => {
     res.send("Waiting for request");

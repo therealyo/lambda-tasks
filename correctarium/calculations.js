@@ -32,27 +32,44 @@ const isInWorkingHours = (date) => {
 }
 
 
-const getNextDayStart = (date) => {
-    const tomorrow = new Date();
-    tomorrow.setDate(date.getDate() + 1);
-    return getWorkingDayStart(tomorrow);
-} 
+const copyDate = (date) => {
+    return new Date(date.getTime());
+}
+
+
+const setNextDayStart = (date) => {
+    date.setDate(date.getDate() + 1)
+    setWorkingDayStart(date);
+}
+
+
+const setWorkingDayEnd = (date) => {
+    date.setHours(constants.time.dayEnd);
+    date.setMinutes(0)
+    date.setSeconds(0);
+}
 
 
 const getWorkingDayEnd = (date) => {
-    const workingDayEnd = new Date(date.getTime());
-    workingDayEnd.setHours(constants.time.dayEnd);
-    workingDayEnd.setMinutes(0)
-    workingDayEnd.setSeconds(0);
-    return workingDayEnd;
+    const dayEnd = copyDate(date);
+    setWorkingDayEnd(dayEnd);
+    return dayEnd;
+
 }
 
+
+const setWorkingDayStart = (date) => {
+    date.setHours(constants.time.dayStart);
+    date.setMinutes(0)
+    date.setSeconds(0);
+}
+
+
 const getWorkingDayStart = (date) => {
-    const workingDayStart = new Date(date.getTime());
-    workingDayStart.setHours(constants.time.dayStart);
-    workingDayStart.setMinutes(0)
-    workingDayStart.setSeconds(0);
-    return workingDayStart;
+    const dayStart = copyDate(date);
+    setWorkingDayStart(dayStart);
+    return dayStart;
+
 }
 
 
@@ -74,18 +91,18 @@ const calculateDeadline = (date, timeNeeded) => {
                 date.setHours(10);
             }
             if (isInWorkingHours(date)) {
-                if (timeNeeded <= getWorkingTimeRemainedInDay(date)){
+                if (timeNeeded <= getWorkingTimeRemainedInDay(date)) {
                     date = addTimeToDate(date, timeNeeded);
                     return date;
                 } else {
                     timeNeeded -= getWorkingTimeRemainedInDay(date);
-                    date = getNextDayStart(date);
+                    setNextDayStart(date);
                 }
             } else {
-                date = getNextDayStart(date);
+                setNextDayStart(date);
             }
         } else {
-            date = getNextDayStart(date);
+            setNextDayStart(date);
         }
     }
 }
