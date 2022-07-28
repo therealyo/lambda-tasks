@@ -1,5 +1,4 @@
 require("dotenv").config();
-const jwt = require("jsonwebtoken");
 const { MongoClient } = require("mongodb");
 const dbUtils = require("../utils/database");
 const { isEmptyQuery } = require("../utils/query");
@@ -11,16 +10,14 @@ exports.signUp = async (req, res) => {
     const user = req.body;
 
     try {
-        client.connect().then(async () => {
-            const db = client.db("autorization");
-            const users = db.collection("users");
-            user.refreshToken = generateRefreshToken(user);
-            const addedStatus = await dbUtils.addUserToDB(users, user);
+        await client.connect();
 
-            console.log(addedStatus);
-            client.close();
-            res.send(addedStatus);
-        });
+        user.refreshToken = generateRefreshToken(user);
+        const addedSatus = await dbUtils.addUserToDB(client, user);
+
+        client.close();
+
+        res.send(addedSatus);
     } catch (err) {
         console.error(err);
     }
@@ -30,27 +27,24 @@ exports.login = async (req, res) => {
     const query = req.query;
     if (!isEmptyQuery(query)) {
         try {
-            client.connect().then(async () => {
-                const db = client.db("autorization");
-                const users = db.collection("users");
-                const user = await dbUtils.getUserFromDB(users, query);
-
-                client.close();
-
-                if (!user || query.password !== user.password) {
-                    res.status(400).json({
-                        message: "Incorrect login or password",
-                    });
-                    return;
-                }
-
-                user.accessToken = generateAccessToken(user);
-
-                res.status(200).json({
-                    message: "Logged in",
-                    email: user.email,
-                    access_token: user.accessToken,
+            await client.connect();
+            const user = await dbUtils.getUserFromDB(client, query);
+            
+            client.close();
+            
+            if (!user || query.password !== user.password) {
+                res.status(400).json({
+                    message: "Incorrect login or password",
                 });
+                return;
+            }
+
+            user.accessToken = generateAccessToken(user);
+
+            res.status(200).json({
+                message: "Logged in",
+                email: user.email,
+                access_token: user.accessToken,
             });
         } catch (err) {
             console.log(err);
@@ -73,12 +67,17 @@ exports.getMe = (req, res) => {
 exports.refreshToken = async (req, res) => {
     const user = req.user;
     user.refreshToken = generateRefreshToken(user);
-    client.connect().then(async () => {
-        const db = client.db("autorization");
-        const users = db.collection("users");
-        await dbUtils.updateUserInDB(users, user);
-    });
-
+    
+    try {
+        await client.connect();
+        await dbUtils.updateUserInDB(client, user);
+        
+        client.close();
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Unable to autorize");
+    }
+    
     const newToken = generateAccessToken(user);
     res.status(200).json({
         message: "Token Refreshed",

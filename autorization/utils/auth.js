@@ -18,7 +18,7 @@ exports.generateAccessToken = (user) => {
         },
         process.env.SECRET,
         {
-            expiresIn: `30s`
+            expiresIn: `${expTime}s`,
         }
     );
 };
@@ -28,22 +28,21 @@ exports.generateRefreshToken = (user) => {
         {
             user_id: user._id,
             email: user.email,
-            password: user.password
+            password: user.password,
         },
         process.env.SECRET_REFRESH,
         {
-            expiresIn: "2d"
+            expiresIn: "2d",
         }
-
-    )
-}
+    );
+};
 
 exports.verifyRefreshToken = (req, res, next) => {
     try {
         const token = (
             req.body.refreshToken ||
             req.query.refreshToken ||
-            req.headers["x-refresh-token"] 
+            req.headers["x-refresh-token"]
         ).replace(/Bearer\s?/, "");
 
         if (!token) {
@@ -57,12 +56,10 @@ exports.verifyRefreshToken = (req, res, next) => {
         } catch (err) {
             return res.status(401).send("Refresh token does not match");
         }
-
-
     } catch (err) {
         return res.status(403).send("Token must be provided");
     }
-}
+};
 
 exports.verifyToken = (req, res, next) => {
     try {
@@ -80,7 +77,7 @@ exports.verifyToken = (req, res, next) => {
         try {
             const decoded = jwt.verify(token, process.env.SECRET);
             req.user = decoded;
-            return next()
+            return next();
         } catch (err) {
             if (err instanceof jwt.TokenExpiredError) {
                 return res.status(401).send("Expired Token");
