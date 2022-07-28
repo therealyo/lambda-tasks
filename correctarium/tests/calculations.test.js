@@ -1,4 +1,4 @@
-const calculations = require("./calculations");
+const calculations = require("../utils/calculations");
 
 
 describe("Calculations tests", () => {
