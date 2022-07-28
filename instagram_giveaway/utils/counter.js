@@ -28,7 +28,7 @@ const countOccurrence = async (unique, dir) => {
 }
 
 
-const getAllAppearedInN = async (occurrence, dir, N) => {
+const getAllAppearedInN = async (occurrence, N) => {
     let counter = 0;
 
     for (const val of occurrence.values()) {
@@ -41,13 +41,13 @@ const getAllAppearedInN = async (occurrence, dir, N) => {
 }
 
 
-const getAllAppearedIn20 = async (occurrence, dir) => {
-    return await getAllAppearedInN(occurrence, dir, 20);
+const getAllAppearedIn20 = async (occurrence) => {
+    return await getAllAppearedInN(occurrence, 20);
 }
 
 
-const getAllAppearedIn10More = async (occurrence, dir) => {
-    return await getAllAppearedInN(occurrence, dir, 10);
+const getAllAppearedIn10More = async (occurrence) => {
+    return await getAllAppearedInN(occurrence, 10);
 }
 
 
