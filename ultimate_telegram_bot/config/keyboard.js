@@ -1,6 +1,5 @@
 const kb = require("./keyboard-buttons");
 
-
 module.exports = {
     home: [
         [kb.home.weather],
