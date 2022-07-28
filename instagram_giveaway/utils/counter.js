@@ -1,16 +1,13 @@
 const path = require("path");
 const reader = require("./reader");
 
-
-
 const createEmptyMap = async (unique) => {
     const map = new Map();
     for (const el of unique) {
         map.set(el, 0);
     }
     return map;
-}
-
+};
 
 const countOccurrence = async (unique, dir) => {
     const dirIterator = await reader.readDir(dir);
@@ -25,8 +22,7 @@ const countOccurrence = async (unique, dir) => {
         }
     }
     return occurrence;
-}
-
+};
 
 const getAllAppearedInN = async (occurrence, N) => {
     let counter = 0;
@@ -38,21 +34,18 @@ const getAllAppearedInN = async (occurrence, N) => {
     }
 
     return counter;
-}
-
+};
 
 const getAllAppearedIn20 = async (occurrence) => {
     return await getAllAppearedInN(occurrence, 20);
-}
-
+};
 
 const getAllAppearedIn10More = async (occurrence) => {
     return await getAllAppearedInN(occurrence, 10);
-}
-
+};
 
 module.exports = {
     countOccurrence,
     getAllAppearedIn20,
-    getAllAppearedIn10More
-}
+    getAllAppearedIn10More,
+};
