@@ -1,6 +1,6 @@
 const fs = require("fs");
-const reader = require("./reader_utils");
-const counter = require("./counter_utils");
+const reader = require("./reader");
+const counter = require("./counter");
 
 const writeResults = (results) => {
     fs.writeFile("README.md", results.replaceAll("\n", "<br />"), "utf8", (err) => {

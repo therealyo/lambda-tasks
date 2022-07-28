@@ -1,7 +1,7 @@
-const result = require("./result_utils");
+const result = require("./utils/result");
 
 
-const dataDir = "2kk_words_400x400";
+const dataDir = "data/2kk_words";
 
 
 const main = async () => {
