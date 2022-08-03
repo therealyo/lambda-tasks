@@ -2,8 +2,8 @@ import express, { Express, Request, Response } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import {
-    servePostRequest,
-    serveGetRequest,
+    processPostRequest,
+    processGetRequest,
 } from "./controllers/UserController";
 
 dotenv.config();
@@ -21,8 +21,8 @@ app.get("/", (req: Request, res: Response) => {
     res.send("Add your personal route");
 });
 
-app.get("/:path", serveGetRequest);
-app.post("/:path", servePostRequest);
+app.get("/:path", processGetRequest);
+app.post("/:path", processPostRequest);
 
 app.listen(PORT, () => {
     console.log(`Server started at http://localhost:${PORT}`);

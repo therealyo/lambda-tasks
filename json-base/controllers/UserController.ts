@@ -5,7 +5,7 @@ import {
     updateRouteDate,
 } from "../utils/database";
 
-export const serveGetRequest = async (req: Request, res: Response) => {
+export const processGetRequest = async (req: Request, res: Response) => {
     try {
         const userData = await getRouteData(req.params.path);
         if (userData) {
@@ -21,7 +21,7 @@ export const serveGetRequest = async (req: Request, res: Response) => {
     }
 };
 
-export const servePostRequest = async (req: Request, res: Response) => {
+export const processPostRequest = async (req: Request, res: Response) => {
     try {
         if (!(await getRouteData(req.params.path))) {
             await createRouteData(req.params.path, req.body);
