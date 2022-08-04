@@ -39,3 +39,4 @@ const getCoinpaprikaExchangeRates = () => __awaiter(void 0, void 0, void 0, func
     return yield Promise.all(data.map(transformCoinpaprikaCoinData));
 });
 exports.getCoinpaprikaExchangeRates = getCoinpaprikaExchangeRates;
+exports.default = exports.getCoinpaprikaExchangeRates;

@@ -1,22 +1,25 @@
-import express, { Express, Request, Response } from 'express'
+import express, { Express, Request, Response } from 'express';
+import {
+    convertCoinObjectToArray,
+    flatArray,
+    makeAPIDataWritableToDB
+} from './utils/array_utils';
+import { retrieveAllApisData } from './utils/retrieve_api';
 
 const PORT = process.env.PORT || 3000;
 
 const app: Express = express();
+app.use(express.json());
 
-app.get('/:crypto', (req: Request, res: Response) => {
-    console.log(req.params.crypto);
-})
-
-app.get('/:platform', (req: Request, res: Response) => {
-    console.log(req.params.platform);
-})
-
-app.get('/:platform:crypto', (req: Request, res: Response) => {
-    console.log(req.params.platform);
-    console.log(req.params.crypto);
-})
+app.get('/', async (req: Request, res: Response) => {
+    const test = await retrieveAllApisData();
+    // console.log(test);
+    const writable = makeAPIDataWritableToDB(test);
+    console.log(writable);
+    // console.log(flatTest);
+    res.send('good');
+});
 
 app.listen(PORT, () => {
-    console.log(`Server started at http://localhost:${PORT}`)
-})
+    console.log(`Server started at http://localhost:${PORT}`);
+});

@@ -25,7 +25,11 @@ const transformCoinstatsData = async (coin: Coin): Promise<Coin> => {
     };
 };
 
-export const getCoinstatsExchangeRates = async () => {
+export const getCoinstatsExchangeRates = async (): Promise<
+    (Coin | undefined)[]
+> => {
     const data = await getCoinstatsData();
     return await Promise.all(data.map(transformCoinstatsData));
 };
+
+export default getCoinstatsExchangeRates;

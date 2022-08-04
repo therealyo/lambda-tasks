@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getKucoinExchangeRates = exports.kucoinCoinsSymbolsAndNames = void 0;
 const axios_1 = __importDefault(require("axios"));
 const date_1 = require("../date");
+const array_utils_1 = require("../array_utils");
 const market_data_1 = require("../market_data");
 const getKucoinSymbolsAndNames = () => __awaiter(void 0, void 0, void 0, function* () {
     const { data: { data } } = yield (0, axios_1.default)({
@@ -46,18 +47,26 @@ const kucoinCoinsSymbolsAndNames = () => __awaiter(void 0, void 0, void 0, funct
 });
 exports.kucoinCoinsSymbolsAndNames = kucoinCoinsSymbolsAndNames;
 const transformKucoinData = (prices, coinData) => __awaiter(void 0, void 0, void 0, function* () {
-    return {
-        symbol: coinData.symbol,
-        name: coinData.name,
-        price: yield getKucoinCoinPrice(prices, coinData.symbol),
-        market: 'kucoin',
-        dateUpdated: (0, date_1.formatDate)(new Date()),
-        dateUpdatedUnix: (0, date_1.getUNIX)(new Date())
-    };
+    const coinPrice = yield getKucoinCoinPrice(prices, coinData.symbol);
+    if (coinPrice !== 0) {
+        return {
+            symbol: coinData.symbol,
+            name: coinData.name,
+            price: coinPrice,
+            market: 'kucoin',
+            dateUpdated: (0, date_1.formatDate)(new Date()),
+            dateUpdatedUnix: (0, date_1.getUNIX)(new Date())
+        };
+    }
 });
-const getKucoinExchangeRates = () => __awaiter(void 0, void 0, void 0, function* () {
+const getKucoinExchangeRatesUnfiltered = () => __awaiter(void 0, void 0, void 0, function* () {
     const symbols = yield (0, exports.kucoinCoinsSymbolsAndNames)();
     const prices = yield getKucoinPrices();
     return yield Promise.all(symbols.map((coinData) => transformKucoinData(prices, coinData)));
 });
+const getKucoinExchangeRates = () => __awaiter(void 0, void 0, void 0, function* () {
+    const rates = yield getKucoinExchangeRatesUnfiltered();
+    return (0, array_utils_1.filterArray)(rates);
+});
 exports.getKucoinExchangeRates = getKucoinExchangeRates;
+exports.default = exports.getKucoinExchangeRates;

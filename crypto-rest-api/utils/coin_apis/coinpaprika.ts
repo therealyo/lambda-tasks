@@ -25,7 +25,11 @@ const transformCoinpaprikaCoinData = async (
     };
 };
 
-export const getCoinpaprikaExchangeRates = async () => {
+export const getCoinpaprikaExchangeRates = async (): Promise<
+    (Coin | undefined)[]
+> => {
     const data = await getCoinpaprikaData();
     return await Promise.all(data.map(transformCoinpaprikaCoinData));
 };
+
+export default getCoinpaprikaExchangeRates;

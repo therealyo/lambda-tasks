@@ -39,3 +39,4 @@ const getCoinstatsExchangeRates = () => __awaiter(void 0, void 0, void 0, functi
     return yield Promise.all(data.map(transformCoinstatsData));
 });
 exports.getCoinstatsExchangeRates = getCoinstatsExchangeRates;
+exports.default = exports.getCoinstatsExchangeRates;

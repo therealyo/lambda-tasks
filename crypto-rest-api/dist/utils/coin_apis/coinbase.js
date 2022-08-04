@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getCoinbaseExchangeRates = void 0;
 const axios_1 = __importDefault(require("axios"));
 const date_1 = require("../date");
+const array_utils_1 = require("../array_utils");
 const market_data_1 = require("../market_data");
 const kucoin_1 = require("./kucoin");
 const getCoinbaseDataAboutCoin = (coin) => __awaiter(void 0, void 0, void 0, function* () {
@@ -45,11 +46,9 @@ const getCoinbaseDataAllCoins = () => __awaiter(void 0, void 0, void 0, function
     const symbols = yield (0, kucoin_1.kucoinCoinsSymbolsAndNames)();
     return yield Promise.all(symbols.map(createCoinbaseCoinData));
 });
-const removeUndefinedFromCoinbaseData = () => __awaiter(void 0, void 0, void 0, function* () {
-    const data = yield getCoinbaseDataAllCoins();
-    return data.filter(el => el);
-});
 const getCoinbaseExchangeRates = () => __awaiter(void 0, void 0, void 0, function* () {
-    return yield removeUndefinedFromCoinbaseData();
+    const data = yield getCoinbaseDataAllCoins();
+    return (0, array_utils_1.filterArray)(data);
 });
 exports.getCoinbaseExchangeRates = getCoinbaseExchangeRates;
+exports.default = exports.getCoinbaseExchangeRates;

@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { formatDate, getUNIX } from '../date';
+import { filterArray } from '../array_utils';
 import { coinbase } from '../market_data';
 import { kucoinCoinsSymbolsAndNames } from './kucoin';
+import { Coin } from '../types';
 
 const getCoinbaseDataAboutCoin = async (coin: {
     symbol: string;
@@ -41,11 +43,11 @@ const getCoinbaseDataAllCoins = async () => {
     return await Promise.all(symbols.map(createCoinbaseCoinData));
 };
 
-const removeUndefinedFromCoinbaseData = async () => {
+export const getCoinbaseExchangeRates = async (): Promise<
+    (Coin | undefined)[]
+> => {
     const data = await getCoinbaseDataAllCoins();
-    return data.filter(el => el);
-}
+    return filterArray(data);
+};
 
-export const getCoinbaseExchangeRates = async () => {
-    return await removeUndefinedFromCoinbaseData();
-}
+export default getCoinbaseExchangeRates;

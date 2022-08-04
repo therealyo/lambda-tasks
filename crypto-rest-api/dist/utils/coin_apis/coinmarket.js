@@ -46,3 +46,4 @@ const getCoinmarketExchangeRates = () => __awaiter(void 0, void 0, void 0, funct
     return yield Promise.all(data.map(transofrmCoinmarketData));
 });
 exports.getCoinmarketExchangeRates = getCoinmarketExchangeRates;
+exports.default = exports.getCoinmarketExchangeRates;

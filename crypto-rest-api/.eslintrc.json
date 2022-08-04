@@ -15,7 +15,9 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "semi": ["error", "off"],
-        "indent" : ["error", 4]
+        "semi": "off",
+        "indent" : ["error", 4],
+        "no-prototype-builtins": "off",
+        "quotes":"off"
     }
 }

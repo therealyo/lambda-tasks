@@ -36,7 +36,11 @@ const transofrmCoinmarketData = async (
     };
 };
 
-export const getCoinmarketExchangeRates = async () => {
+export const getCoinmarketExchangeRates = async (): Promise<
+    (Coin | undefined)[]
+> => {
     const data = await getCoinmarketData();
     return await Promise.all(data.map(transofrmCoinmarketData));
 };
+
+export default getCoinmarketExchangeRates;

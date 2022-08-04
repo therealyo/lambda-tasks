@@ -35,6 +35,15 @@ export type Coin = {
     dateUpdatedUnix: number
 }
 
+export type CoinAsArray = [
+    string,
+    string,
+    number,
+    string,
+    string,
+    number
+];
+
 export type Prices = {
     [key: string]: string
 }
