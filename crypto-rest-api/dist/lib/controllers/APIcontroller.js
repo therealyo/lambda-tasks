@@ -10,11 +10,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.processRequest = void 0;
-const array_utils_1 = require("../utils/array_utils");
-const retrieve_api_1 = require("../utils/retrieve_api");
+const database_1 = require("../db/database");
 const processRequest = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const data = yield (0, retrieve_api_1.getFilteredAPIsData)();
-    console.log((0, array_utils_1.makeAPIDataWritableToDB)(data));
-    res.json(data);
+    var _a;
+    // console.log(req.query.crypto);
+    // console.log(req.query.market);
+    const queryString = (0, database_1.generateQueryString)((_a = req.query.crypto) === null || _a === void 0 ? void 0 : _a.split(","), req.query.market, req.query.startDate, req.query.endDate);
+    try {
+        const data = (yield (0, database_1.getCoinDataFromQuery)(queryString))[0];
+        res.status(200).json(data);
+    }
+    catch (err) {
+        res.status(400).send(queryString);
+    }
 });
 exports.processRequest = processRequest;
