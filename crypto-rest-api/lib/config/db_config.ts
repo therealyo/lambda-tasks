@@ -5,7 +5,13 @@ dotenv.config();
 export const databaseConfig = {
     host: 'localhost',
     user: 'root',
-    database: 'restAPI',
+    database: 'cryptoRestAPI',
+    password: `${process.env.DBPASSWORD}`
+};
+
+export const sqlConfig = {
+    host: 'localhost',
+    user: 'root',
     password: `${process.env.DBPASSWORD}`
 };
 

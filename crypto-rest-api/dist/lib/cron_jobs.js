@@ -9,9 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const array_utils_1 = require("./array_utils");
-const database_1 = require("./database");
-const retrieve_api_1 = require("./retrieve_api");
+const array_utils_1 = require("./utils/array_utils");
+const database_1 = require("./db/database");
+const retrieve_api_1 = require("./utils/retrieve_api");
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     const apiData = yield (0, retrieve_api_1.getFilteredAPIsData)();
     const coins = (0, array_utils_1.makeAPIDataWritableToDB)(apiData);

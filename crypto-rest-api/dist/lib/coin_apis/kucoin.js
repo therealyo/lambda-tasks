@@ -14,9 +14,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getKucoinExchangeRates = exports.kucoinCoinsSymbolsAndNames = void 0;
 const axios_1 = __importDefault(require("axios"));
-const date_1 = require("../date");
-const array_utils_1 = require("../array_utils");
-const market_data_1 = require("../market_data");
+const date_1 = require("../utils/date");
+const array_utils_1 = require("../utils/array_utils");
+const market_data_1 = require("../config/market_data");
 const getKucoinSymbolsAndNames = () => __awaiter(void 0, void 0, void 0, function* () {
     const { data: { data } } = yield (0, axios_1.default)({
         method: 'get',

@@ -30,8 +30,7 @@ const transformCoinpaprikaCoinData = (coin) => __awaiter(void 0, void 0, void 0,
         name: coin.name,
         price: coin.quotes.USD.price,
         market: 'coinpaprika',
-        dateUpdated: (0, date_1.formatDate)(new Date()),
-        dateUpdatedUnix: (0, date_1.getUNIX)(new Date())
+        dateUpdated: (0, date_1.formatDate)(new Date())
     };
 });
 const getCoinpaprikaExchangeRates = () => __awaiter(void 0, void 0, void 0, function* () {

@@ -32,7 +32,6 @@ export type Coin = {
     price: number,
     market: string,
     dateUpdated: string,
-    dateUpdatedUnix: number
 }
 
 export type CoinAsArray = [
@@ -41,7 +40,6 @@ export type CoinAsArray = [
     number,
     string,
     string,
-    number
 ];
 
 export type Prices = {

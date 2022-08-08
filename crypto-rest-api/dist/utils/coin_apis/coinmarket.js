@@ -37,8 +37,7 @@ const transofrmCoinmarketData = (coin) => __awaiter(void 0, void 0, void 0, func
         name: coin.name,
         price: coin.quote.USD.price,
         market: 'coinmarket',
-        dateUpdated: (0, date_1.formatDate)(new Date()),
-        dateUpdatedUnix: (0, date_1.getUNIX)(new Date())
+        dateUpdated: (0, date_1.formatDate)(new Date())
     };
 });
 const getCoinmarketExchangeRates = () => __awaiter(void 0, void 0, void 0, function* () {

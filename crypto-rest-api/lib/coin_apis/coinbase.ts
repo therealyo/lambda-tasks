@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { formatDate, getUNIX } from '../date';
-import { filterArray } from '../array_utils';
-import { coinbase } from '../market_data';
+import { formatDate } from '../utils/date';
+import { filterArray } from '../utils/array_utils';
+import { coinbase } from '../config/market_data';
 import { kucoinCoinsSymbolsAndNames } from './kucoin';
-import { Coin } from '../types';
+import { Coin } from '../config/types';
 
 const getCoinbaseDataAboutCoin = async (coin: {
     symbol: string;
@@ -32,8 +32,7 @@ const createCoinbaseCoinData = async (coin: {
             name: coin.name,
             price: parseFloat(data.amount),
             market: 'coinbase',
-            dateUpdated: formatDate(new Date()),
-            dateUpdatedUnix: getUNIX(new Date())
+            dateUpdated: formatDate(new Date())
         };
     }
 };

@@ -1,4 +1,4 @@
-import { Coin } from "./types";
+import { Coin } from "../config/types";
 
 export const filterArray = (array: (Coin | undefined)[]) => {
     return array.filter(el => el);

@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { formatDate, getUNIX } from '../date';
-import { filterArray } from '../array_utils';
-import { kucoin } from '../market_data';
-import { Coin, KucoinDataPiece, Prices } from '../types';
+import { formatDate } from '../utils/date';
+import { filterArray } from '../utils/array_utils';
+import { kucoin } from '../config/market_data';
+import { Coin, KucoinDataPiece, Prices } from '../config/types';
 
 const getKucoinSymbolsAndNames = async (): Promise<KucoinDataPiece[]> => {
     const {
@@ -52,8 +52,7 @@ const transformKucoinData = async (
             name: coinData.name,
             price: coinPrice,
             market: 'kucoin',
-            dateUpdated: formatDate(new Date()),
-            dateUpdatedUnix: getUNIX(new Date())
+            dateUpdated: formatDate(new Date())
         };
     }
 };

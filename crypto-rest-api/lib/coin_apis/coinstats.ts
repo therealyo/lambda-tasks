@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { formatDate, getUNIX } from '../date';
-import { coinstats } from '../market_data';
-import { Coin } from '../types';
+import { formatDate } from '../utils/date';
+import { coinstats } from '../config/market_data';
+import { Coin } from '../config/types';
 
 const getCoinstatsData = async () => {
     const {
@@ -20,8 +20,7 @@ const transformCoinstatsData = async (coin: Coin): Promise<Coin> => {
         name: coin.name,
         price: coin.price,
         market: 'coinstats',
-        dateUpdated: formatDate(new Date()),
-        dateUpdatedUnix: getUNIX(new Date())
+        dateUpdated: formatDate(new Date())
     };
 };
 

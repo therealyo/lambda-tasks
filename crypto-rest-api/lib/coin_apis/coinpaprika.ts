@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { formatDate, getUNIX } from '../date';
-import { coinpaprika } from '../market_data';
-import { Coin, CoinpaprikaDataPiece } from '../types';
+import { formatDate } from '../utils/date';
+import { coinpaprika } from '../config/market_data';
+import { Coin, CoinpaprikaDataPiece } from '../config/types';
 
 const getCoinpaprikaData = async () => {
     const { data } = await axios({
@@ -20,8 +20,7 @@ const transformCoinpaprikaCoinData = async (
         name: coin.name,
         price: coin.quotes.USD.price,
         market: 'coinpaprika',
-        dateUpdated: formatDate(new Date()),
-        dateUpdatedUnix: getUNIX(new Date())
+        dateUpdated: formatDate(new Date())
     };
 };
 

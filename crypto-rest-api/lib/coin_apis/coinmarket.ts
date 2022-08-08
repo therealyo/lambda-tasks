@@ -1,8 +1,8 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
-import { formatDate, getUNIX } from '../date';
-import { coinmarket } from '../market_data';
-import { Coin, CoinmarketDataPiece } from '../types';
+import { formatDate } from '../utils/date';
+import { coinmarket } from '../config/market_data';
+import { Coin, CoinmarketDataPiece } from '../config/types';
 
 dotenv.config();
 
@@ -31,8 +31,7 @@ const transofrmCoinmarketData = async (
         name: coin.name,
         price: coin.quote.USD.price,
         market: 'coinmarket',
-        dateUpdated: formatDate(new Date()),
-        dateUpdatedUnix: getUNIX(new Date())
+        dateUpdated: formatDate(new Date())
     };
 };
 
