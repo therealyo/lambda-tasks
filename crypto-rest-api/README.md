@@ -1,4 +1,4 @@
-CRYPTO REST API
+## CRYPTO REST API ##
 
 This project can help you get current or past prices of crypto currencies from these markets: <br />
 1. [CoinMarketCap](https://coinmarketcap.com/ "CoinMarketCap")
@@ -11,7 +11,7 @@ This project can help you get current or past prices of crypto currencies from t
 - crypto - csv of crypto currencies you are interested in (required) <br />
 - market - if specified show info from a certain market ( <br />
 &emsp;optional, <br />
-&emsp;&emsp;possible values: [ <br />
+&emsp;possible values: [ <br />
 &emsp;&emsp;'coinmarket', <br />
 &emsp;&emsp;'coinbase', <br />
 &emsp;&emsp;'coinpaprika', <br />
