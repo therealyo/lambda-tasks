@@ -1,11 +1,10 @@
-import mysql from 'mysql2';
-import { CoinAsArray } from '../config/types';
 import databaseConfig from '../config/db_config';
+import { CoinAsArray } from '../config/types';
 import { validateMarketString } from '../utils/validator';
-
-const connection = mysql.createConnection(databaseConfig);
+import { connectionRequest } from './connectionRequest';
 
 export const writeCoinDataToDB = (coins: CoinAsArray[]) => {
+    const connection = connectionRequest(databaseConfig);
     const queryString = 'INSERT INTO cryptoapi VALUES ?';
     connection.query(queryString, [coins], function (err) {
         if (err) {
@@ -18,8 +17,10 @@ export const writeCoinDataToDB = (coins: CoinAsArray[]) => {
 };
 
 export const getCoinDataFromQuery = async (query: string) => {
+    const connection = connectionRequest(databaseConfig);
     const result = await connection.promise().query(query);
-    return result;
+    connection.destroy();
+    return result[0];
 };
 
 const selectCoinsFromMarket = (market: string | undefined) => {
@@ -69,7 +70,10 @@ export const generateQueryString = (
             ? 'symbol, name, price, market, dateUpdated'
             : 'symbol, name, ROUND(AVG(price), 2) as avg_price, dateUpdated';
         const groupBy = 'GROUP BY symbol, dateUpdated';
-        const orderBy = 'ORDER BY dateUpdated DESC;';
+        const orderBy =
+            start && end
+                ? `ORDER BY dateUpdated DESC;` // if time period provided we show all entries in this period, otherwise latest
+                : `ORDER BY dateUpdated DESC LIMIT ${symbols.length};`;
         return `SELECT ${selectQuery} FROM ${dateQuery} WHERE ${marketQuery} symbol IN (${symbolsQuery}) ${groupBy} ${orderBy}`;
     }
 };
