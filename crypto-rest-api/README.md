@@ -17,7 +17,7 @@ This project can help you get current or past prices of crypto currencies from t
 &emsp;&emsp;'coinpaprika', <br />
 &emsp;&emsp;'coinstats', <br /> 
 &emsp;&emsp;'kucoin' <br />
-        ];)
+&emsp;];)
 - startDate and endDate - if you want to get data from a certain period of time you should specifie both of this parameters <br />
 &emsp; this parameters must be in UTC-0 time zone and in format "YYYY-MM-DD HH-MM-SS"
 
