@@ -1,9 +1,10 @@
 import TelegramBot from 'node-telegram-bot-api';
-import dotenv from 'dotenv';
-import { sayHi } from './lib/controllers/start';
-import { showHelpMessage } from './lib/controllers/help';
-import { listRecent } from './lib/controllers/listRecent';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+import { showHelpMessage } from './lib/controllers/help';
+import { sayHi } from './lib/controllers/start';
+import { listRecent } from './lib/controllers/listRecent';
 import { handleAddToFavourite } from './lib/controllers/addFavourite';
 import { handleDeleteFromFavourite } from './lib/controllers/deleteFavourite';
 import { handleListFavourite } from './lib/controllers/listFavourite';
